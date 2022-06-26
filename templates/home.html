@@ -10,7 +10,7 @@
 
     <title>Weather</title>
   </head>
-  <body>
+  <body class="bg-dark text-light">
   {% with messages = get_flashed_messages() %}
   {% for message in messages %}
   <div class="alert alert-primary fade-in alert-dismissible" role="alert">
@@ -59,7 +59,8 @@
 <!--        </div>-->
 <br>
         {% for weather in weather_data %}
-        <div class="card shadow-0 border">
+          <br>
+        <div class="card shadow-0 border-primary bg-info">
           <div class="card-body p-4">
               <a href="{{ url_for('delete', city=weather.city) }}" class="close" data-dismiss="card" aria-label="close">&times;</a>
             <div class="media-left">
@@ -67,20 +68,23 @@
                 <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Image">
             </figure>
             </div>
-            <h4 class="mb-1 sfw-normal">{{weather.city}}</h4>
+            <h4 class="mb-1 sfw-normal text-light">{{weather.city}}</h4>
             <p class="mb-2">Current temperature: <strong>{{weather.temperature}}</strong></p>
               <p class="mb-2">Feels like: <strong>{{weather.feels_like}}</strong></p>
-<!--            <p>Feels like: <strong>4.37°C</strong></p>-->
-<!--            <p>Max: <strong>6.11°C</strong>, Min: <strong>3.89°C</strong></p>-->
 
-            <div class="d-flex flex-row align-items-center">
-              <p class="mb-0 me-4">{{weather.description}}</p>
-              <i class="fas fa-cloud fa-3x" style="color: #eee;"></i>
+
+<!--            <p>Feels like: <strong>{{weather.feels_like}}</strong></p>-->
+            <p class="mb-2">Max: <strong>{{weather.temp_max}}</strong>, Min: <strong>{{weather.temp_min}}</strong></p>
+
+<!--            <div class="d-flex flex-row align-items-center">-->
+<!--              <p class="mb-0 me-4">{{weather.description}}</p>-->
+<!--              <i class="fas fa-cloud fa-3x" style="color: #eee;"></i>-->
             </div>
 
           </div>
+          {% endfor %}
         </div>
-{% endfor %}
+
       </div>
 
     </div>
