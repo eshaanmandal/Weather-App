@@ -61,6 +61,7 @@
         {% for weather in weather_data %}
         <div class="card shadow-0 border">
           <div class="card-body p-4">
+              <a href="{{ url_for('delete', city=weather.city) }}" class="close" data-dismiss="card" aria-label="close">&times;</a>
             <div class="media-left">
             <figure class="image is-50x50">
                 <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Image">
