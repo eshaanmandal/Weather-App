@@ -5,7 +5,7 @@ import requests
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///city.db'
-app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+app.secret_key = 'a_secret_key'
 db = SQLAlchemy(app)
 
 
@@ -42,6 +42,7 @@ def handle_post_requests():
     else:
         flash('City added!')
 
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -63,6 +64,16 @@ def index():
         weather_data.append(weather)
 
     return render_template("home.html", weather_data=weather_data)
+
+
+@app.route('/delete/<city>')
+def delete(city):
+    if City.query.filter_by(name=city).first() is not None:
+        City.query.filter_by(name=city).delete()
+        db.session.commit()
+
+    return redirect(url_for('index'))
+
 
 
 if __name__ == "__main__":
